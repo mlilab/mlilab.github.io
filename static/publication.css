@@ -1,0 +1,56 @@
+.filter-handle {
+  cursor: pointer;
+  line-height: 1;
+}
+
+.filter-handle:not(:first-child) {
+  padding-left: 16px;
+}
+
+.filter-handle:not(:last-child) {
+  padding-right: 16px;
+  border-right: 1px solid #495057;
+}
+
+.filter-handle:hover {
+  color: #ff922b;
+}
+
+.filter-handle.active {
+  color: #fd7e14;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.author {
+  font-size: 0.875em;
+}
+
+.published-to {
+  font-size: 0.875em;
+}
+
+.additional-info {
+  font-size: 0.875em;
+  font-weight: bold;
+}
+
+.paper-url {
+  color: #495057;
+}
+
+@media (max-width: 768px) {
+  .filters {
+    display: flex;
+    flex-wrap: wrap
+  }
+
+  .filter-handle {
+    flex-basis: 100%;
+    padding: 5px 0 !important;
+    border: 0 !important;
+  }
+}

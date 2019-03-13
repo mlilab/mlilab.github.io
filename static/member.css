@@ -1,0 +1,9 @@
+.email,
+.external_link {
+    display: flex;
+    align-items: center;
+
+    margin: 12px 0;
+
+    line-height: 1;
+}

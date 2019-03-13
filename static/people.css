@@ -1,0 +1,67 @@
+.mli-event {
+    width: 80%;
+}
+
+.name {
+    margin-bottom: 6px;
+    min-height: 34px;
+}
+
+@media(max-width: 768px) {
+    .name {
+        min-height: initial;
+    }
+}
+
+.members {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.member {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 30%;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+@media(max-width: 768px) {
+    .member {
+        flex: 0 0 100%;
+    }
+}
+
+.member-profile-wrapper {
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 200px;
+}
+
+.member-profile {
+    max-height: 100%;
+    width: auto;
+}
+
+.member-info {
+    flex-grow: 1;
+}
+
+.member-position {
+    font-size: 1em;
+    margin-bottom: 1px;
+}
+
+.member-email-anchor,
+.member-link-anchor {
+    line-height: 1;
+    color: #495057;
+}
+
+.member-email,
+.member-link {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+}
