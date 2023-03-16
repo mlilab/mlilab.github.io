@@ -3,7 +3,7 @@
 }
 
 .name {
-    margin-bottom: 6px;
+    margin-bottom: 0px;
     min-height: 34px;
 }
 
@@ -11,6 +11,17 @@
     .name {
         min-height: initial;
     }
+}
+
+.professor {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 100%;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    align-items: center;    
+    align-content: center;    
+    text-align: center;    
 }
 
 .members {
@@ -22,14 +33,16 @@
 .member {
     display: flex;
     flex-direction: column;
-    flex: 0 0 30%;
+    flex: 0 0 calc(100% / 3);
     justify-content: space-between;
     margin-bottom: 40px;
+    align-items: center;
 }
 
 @media(max-width: 768px) {
     .member {
         flex: 0 0 100%;
+        align-items: center;
     }
 }
 
@@ -46,11 +59,15 @@
 
 .member-info {
     flex-grow: 1;
+    text-align: center;
+    align-items: center;
 }
 
 .member-position {
     font-size: 1em;
     margin-bottom: 1px;
+    text-align: center;
+    align-items: center;
 }
 
 .member-email-anchor,
@@ -61,7 +78,8 @@
 
 .member-email,
 .member-link {
-    display: flex;
-    align-items: center;
+    display: block;
     padding: 8px 0;
+    text-align: center;
+    align-items: center;
 }

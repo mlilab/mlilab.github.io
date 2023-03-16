@@ -1,9 +1,22 @@
-.email,
+.email {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.member-education {
+    font-size: 1em;
+    margin-bottom: 1px;
+}
+
+.member-research-interests {
+    font-size: 1em;
+    margin-bottom: 1px;
+}
+
 .external_link {
     display: flex;
     align-items: center;
-
     margin: 12px 0;
-
     line-height: 1;
 }
