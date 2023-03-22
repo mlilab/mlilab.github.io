@@ -1,4 +1,4 @@
-.email {
+/* .email {
     display: flex;
     align-items: center;
     text-align: center;
@@ -10,13 +10,13 @@
 }
 
 .member-research-interests {
-    font-size: 1em;
+    font-size: 0.5em;
     margin-bottom: 1px;
-}
+} */
 
-.external_link {
+/* .external_link {
     display: flex;
     align-items: center;
     margin: 12px 0;
     line-height: 1;
-}
+} */
