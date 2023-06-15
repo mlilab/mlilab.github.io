@@ -205,11 +205,15 @@ footer {
     line-height: 2.0;
 }
 
+/* .row {
+    display: inline-block;
+} */
+
 .column {
     float: left;
     width: 20%;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
+    margin-left: 2.4%;
+    margin-right: 2.4%;
 }
   
   /* Clear floats after the columns */
