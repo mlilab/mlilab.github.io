@@ -134,12 +134,18 @@
 .recent-posts {
     width: 48%;
     max-width: 1000px;
-
     margin: 0 1% 0 1%;
 
     float: left;
     display: inline-block;
     flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .recent-posts {
+        width: 96%;
+        margin: 0 2% 0 2%;
+    }
 }
 
 .blog-card {

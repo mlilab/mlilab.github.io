@@ -67,7 +67,6 @@ hr {
 }
 
 /* header */
-
 #header {
     display: flex;
     flex-wrap: wrap;
@@ -152,6 +151,7 @@ hr {
     #nav {
         flex-direction: column;
         width: 100%;
+        height: fit-content;
         display: none;
 
         position: fixed;
@@ -197,9 +197,34 @@ hr {
 
 /* footer */
 footer {
-    padding: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     background-color: #343a40;
     color: white;
     box-shadow: 0 -1px 0 0 #ced4da;
     line-height: 2.0;
+}
+
+.column {
+    float: left;
+    width: 20%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+  
+  /* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media (max-width: 768px) {
+    .column {
+        float: left;
+        width: 95%;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+        margin-bottom: 5%;
+    }
 }

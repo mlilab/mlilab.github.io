@@ -56,7 +56,7 @@
 .member {
     display: flex;
     flex-direction: column;
-    flex: 0 0 calc(100% / 3);
+    flex: 0 0 33%;
     justify-content: space-between;
     margin-bottom: 40px;
     padding: 0.5%;
