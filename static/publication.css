@@ -41,13 +41,9 @@
   display: inline;
 }
 
-.paper-url {
-  font-size: 0.875em;
-  color: #495057;
-  margin-bottom: 4px;
-}
-
-.code-url {
+.paper-url,
+.code-url,
+.project-url {
   font-size: 0.875em;
   color: #495057;
   margin-bottom: 4px;
