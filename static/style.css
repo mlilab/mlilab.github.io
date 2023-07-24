@@ -31,6 +31,7 @@ footer {
     width: 100%;
     flex-shrink: 0;
     flex-grow: 0;
+    z-index: 1;
 }
 
 .container {
@@ -205,10 +206,6 @@ footer {
     line-height: 2.0;
 }
 
-/* .row {
-    display: inline-block;
-} */
-
 /* Clear floats after the columns */
 .row:after {
     content: "";
@@ -219,8 +216,8 @@ footer {
 .column {
     float: left;
     width: 20%;
-    margin-left: 2.4%;
-    margin-right: 2.4%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
 }
 
 @media (max-width: 768px) {

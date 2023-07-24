@@ -1,0 +1,21 @@
+.row_map {
+    padding-bottom: 50%;
+    z-index: -1;
+}
+
+.column_map {
+    float: left;
+    width: 45%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+@media (max-width: 768px) {
+    .column_map {
+        float: left;
+        width: 95%;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+        margin-bottom: 5%;
+    }
+}
