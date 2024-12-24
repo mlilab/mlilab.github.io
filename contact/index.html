@@ -61,7 +61,7 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxvtMznBhFfP4yESpP2WAkPnDA9IY7bwM&language=en&callback=initMap"></script>
     </div>
     <div class="column_map">
-      <div id="map_daejeon" style="width: 100%; height: 400px;"></div>
+      <div id="map_yangjae" style="width: 100%; height: 400px;"></div>
     </div>
   </div>
   <br>
@@ -71,7 +71,7 @@
     <strong>Lab Address</strong><br>
     Seongnam | KAIST-NAVER Hypercreative AI Center, 4F, 95, Jeongjail-ro, Bundang-gu, Seongnam-si, Gyeonggi-do, Republic
     of Korea (ZIP: 13561)<br>
-    Daejeon | 824, N1, 291, Daehak-ro, Yuseong-gu, Daejeon, Republic of Korea (ZIP: 34141)<br><br>
+    Yangjae | SEOUL AI HUB, 5F, 108, Taebong-ro, Seocho-gu, Seoul, Republic of Korea (ZIP: 06764)<br><br>
 
     <strong>Email Address</strong><br>
     Professor | <a href="mailto:eunhoy@kaist.ac.kr">Eunho Yang</a><br>
@@ -99,9 +99,7 @@
     <strong>Notice on the location of our lab</strong>
     <br>
     <div style="text-align: justify;">
-      Our lab is currently located in both Seongnam and Daejeon. However, our lab is relocating from Daejeon to the
-      metropolitan area including Seongnam and Seoul, and most of the students have already moved to Seongnam. Unless
-      there are special circumstances, new members are expected to join us in the metropolitan area.
+      Our lab is currently located in both Seongnam and Yangjae.
     </div>
   </div>
 </div>
@@ -117,7 +115,7 @@
       <div class="column">
         <div style="font-weight: bold;">Lab Address</div>
         Seongnam | KAIST-NAVER Hypercreative AI Center, 4F, 95, Jeongjail-ro, Bundang-gu, Seongnam-si, Gyeonggi-do, Republic of Korea (ZIP: 13561)<br>
-        Daejeon | 824, N1, 291, Daehak-ro, Yuseong-gu, Daejeon, Republic of Korea (ZIP: 34141)<br>
+        Yangjae | SEOUL AI HUB, 5F, 108, Taebong-ro, Seocho-gu, Seoul, Republic of Korea (ZIP: 06764)<br>
       </div>
       <div class="column">
         <div style="font-weight: bold;">Contact</div>
@@ -155,7 +153,7 @@
   </script>
   
 <script>
-  var map_seongnam, map_daejeon;
+  var map_seongnam, map_yangjae;
 
   function initMap() {
     var lab_seongnam = { lat: 37.3586926, lng: 127.1051209 };
@@ -177,24 +175,24 @@
     });
     infowindow_seongnam.open(map_seongnam, marker_seongnam);
 
-    var lab_daejeon = { lat: 36.3741101, lng: 127.3656366 };
-    map_daejeon = new google.maps.Map(document.getElementById('map_daejeon'), {
+    var lab_yangjae = { lat: 37.467214, lng: 127.0282817 };
+    map_yangjae = new google.maps.Map(document.getElementById('map_yangjae'), {
       zoom: 15,
-      center: lab_daejeon
+      center: lab_yangjae
     });
-    var marker_daejeon = new google.maps.Marker({
-      position: lab_daejeon,
-      map: map_daejeon,
+    var marker_yangjae = new google.maps.Marker({
+      position: lab_yangjae,
+      map: map_yangjae,
     });
-    var content_daejeon = '<div id="content">' +
-      '<div style="font-weight:bold;">MLILAB Daejeon Campus</div>' +
-      '<div>Room 824</div>' +
-      '<a href="https://www.google.com/maps/dir//KAIST+김병호ㆍ김삼열+IT융합+빌딩(N1)+대전광역시+유성구+구성동+146-4/data=!4m8!4m7!1m0!1m5!1m1!1s0x35654bcb6deebfb5:0x905962e9ba4daa68!2m2!1d127.3656366!2d36.3741101?entry=ttu" target="_blank">Directions</a>' +
+    var content_yangjae = '<div id="content">' +
+      '<div style="font-weight:bold;">MLILAB Yangjae Campus</div>' +
+      '<div>SEOUL AI HUB</div>' +
+      '<a href="https://www.google.com/maps/place/%EC%84%9C%EC%9A%B8AI%ED%97%88%EB%B8%8C/data=!3m1!4b1!4m6!3m5!1s0x357ca1000e0002f7:0x40fff8a74c33e64c!8m2!3d37.467214!4d127.0282817!16s%2Fg%2F11w1z88sxn?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">Directions</a>' +
       '</div>';
-    var infowindow_daejeon = new google.maps.InfoWindow({
-      content: content_daejeon
+    var infowindow_yangjae = new google.maps.InfoWindow({
+      content: content_yangjae
     });
-    infowindow_daejeon.open(map_daejeon, marker_daejeon);
+    infowindow_yangjae.open(map_yangjae, marker_yangjae);
   }
   initMap();
 </script>
