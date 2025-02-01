@@ -1,0 +1,16 @@
+<svg width="201" height="201" viewBox="0 0 201 201" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M99 53V58.1V70" stroke="#FFAA15" stroke-width="5"/>
+<path d="M99 130V135.1V147" stroke="#FFAA15" stroke-width="5"/>
+<path d="M144 53V68.7627L130 84" stroke="#FFAA15" stroke-width="5"/>
+<path d="M54 53V68.7627L68 84" stroke="#FFAA15" stroke-width="5"/>
+<path d="M53 147L53 131.237L67 116" stroke="#FFAA15" stroke-width="5"/>
+<path d="M144 147L144 131.237L130 116" stroke="#FFAA15" stroke-width="5"/>
+<circle cx="98.5" cy="36.5" r="14" fill="#FFAA15" stroke="#E8EBF0" stroke-width="7"/>
+<circle cx="53.5" cy="36.5" r="14" fill="#FFAA15" stroke="#E8EBF0" stroke-width="7"/>
+<circle cx="143.5" cy="36.5" r="14" fill="#FFAA15" stroke="#E8EBF0" stroke-width="7"/>
+<circle cx="53.5" cy="163.5" r="14" fill="#FFAA15" stroke="#E8EBF0" stroke-width="7"/>
+<circle cx="99.5" cy="163.5" r="14" fill="#FFAA15" stroke="#E8EBF0" stroke-width="7"/>
+<circle cx="143.5" cy="163.5" r="14" fill="#FFAA15" stroke="#E8EBF0" stroke-width="7"/>
+<path d="M98.8453 74C79.6409 74 63.7827 92.1047 60 101.157C63.4917 109.333 78.9425 127 98.8453 127C118.748 127 135.508 109.333 139 101.157C135.217 92.1047 118.05 74 98.8453 74Z" stroke="#3E2804" stroke-width="9"/>
+<circle cx="99" cy="100" r="16" fill="#3E2804"/>
+</svg>

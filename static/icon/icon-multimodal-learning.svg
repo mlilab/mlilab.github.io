@@ -1,0 +1,26 @@
+<svg width="201" height="201" viewBox="0 0 201 201" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M98 98C52.7127 98 16 98 16 98C16 52.7127 52.7127 16 98 16C98 16 98 52.7127 98 98Z" fill="#DBDBDB"/>
+<path d="M103 98C103 52.7127 103 16 103 16C148.287 16 185 52.7127 185 98C185 98 148.287 98 103 98Z" fill="#FFAA15"/>
+<path d="M103 98C103 52.7127 103 16 103 16C148.287 16 185 52.7127 185 98C185 98 148.287 98 103 98Z" fill="#FFAA15"/>
+<path d="M98 103C98 148.287 98 185 98 185C52.7127 185 16 148.287 16 103C16 103 52.7126 103 98 103Z" fill="#3E2804"/>
+<path d="M61 52C49 52 40 60.3404 37 66.2979C39.5 72.2553 49 80 61 80C73 80 83 71.0638 85 66.2979C83 60.9362 73 52 61 52Z" fill="#3E2804"/>
+<circle cx="60.5" cy="66.5" r="8.5" stroke="#DBDBDB" stroke-width="2"/>
+<path d="M112 61L112 70" stroke="white" stroke-width="3" stroke-linecap="round"/>
+<path d="M117.5 52L117.5 80" stroke="white" stroke-width="3" stroke-linecap="round"/>
+<path d="M123.5 43L123.5 89" stroke="white" stroke-width="3" stroke-linecap="round"/>
+<path d="M129.5 55L129.5 75" stroke="white" stroke-width="3" stroke-linecap="round"/>
+<path d="M135.5 57L135.5 73" stroke="white" stroke-width="3" stroke-linecap="round"/>
+<path d="M141.5 50L141.5 80" stroke="white" stroke-width="3" stroke-linecap="round"/>
+<path d="M147.5 55L147.5 77" stroke="white" stroke-width="3" stroke-linecap="round"/>
+<path d="M153.5 58L153.5 74" stroke="white" stroke-width="3" stroke-linecap="round"/>
+<path d="M159.5 62L159.5 68" stroke="white" stroke-width="3" stroke-linecap="round"/>
+<path d="M165.5 61L165.5 70" stroke="white" stroke-width="3" stroke-linecap="round"/>
+<path d="M85 118H60" stroke="white" stroke-width="3" stroke-linecap="round"/>
+<path d="M85 127H60" stroke="white" stroke-width="3" stroke-linecap="round"/>
+<path d="M85 136H41" stroke="white" stroke-width="3" stroke-linecap="round"/>
+<path d="M85 145H41" stroke="white" stroke-width="3" stroke-linecap="round"/>
+<path d="M85 154H41" stroke="white" stroke-width="3" stroke-linecap="round"/>
+<path d="M42.728 130.904C42.088 130.656 41.896 130.216 42.152 129.584L47.864 115.52C48.104 114.992 48.48 114.728 48.992 114.728H49.04C49.56 114.752 49.912 115.016 50.096 115.52L55.904 129.584C56.16 130.216 55.976 130.656 55.352 130.904C54.72 131.152 54.28 130.968 54.032 130.352L52.736 127.208H45.26L44.024 130.352C43.776 130.976 43.344 131.16 42.728 130.904ZM46.052 125.192H51.908L48.92 117.92L46.052 125.192Z" fill="white"/>
+<circle cx="140.3" cy="127.3" r="15.3" fill="#3E2804"/>
+<path d="M140.5 148C125.306 148 116.407 160.906 115 171H166C163.069 160.906 155.694 148 140.5 148Z" fill="#3E2804" stroke="#3E2804" stroke-width="5"/>
+</svg>
