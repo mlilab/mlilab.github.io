@@ -6,6 +6,7 @@
 
 .blog-card-summary {
     line-height: 150%;
+    font-size: 0.875em;
     /* padding: 12px 16px; */
     /* color: #495057; */
 }
@@ -16,3 +17,14 @@
     justify-content: space-between;
     flex-wrap: wrap;
 } */
+
+/* Add these styles for news content */
+.news-body {
+    font-size: 0.875em;
+    line-height: 150%;
+}
+
+/* Add styles for author and date in news */
+.news-meta {
+    font-size: 0.875em;
+}
