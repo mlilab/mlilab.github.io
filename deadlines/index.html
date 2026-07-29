@@ -1,0 +1,1082 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="google-site-verification" content="8AS7SDKzjKVNUxbCcHvNFrtYGndTCzQ-mVMdKIoN5SA" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="Machine Learning and Intelligence Laboratory">
+  <link href="//fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/static/normalize.css">
+  <link rel="stylesheet" href="/static/style.css"> 
+<style>
+  .dl-wrap {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 0 60px;
+  }
+
+  .dl-head h1 {
+    margin: 0 0 4px;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #004e66;
+  }
+  .dl-sub {
+    margin: 6px 0 0;
+    color: #868e96;
+    font-size: 0.85em;
+  }
+
+  /* ── Sticky filter bar (publications-style text filters) ── */
+  .dl-filterbar {
+    position: sticky;
+    top: 80px;
+    z-index: 100;
+    background: white;
+    border-bottom: 1px solid #e9ecef;
+    margin-top: 24px;
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .dl-filters { display: flex; flex-wrap: wrap; align-items: center; }
+  .filter-handle {
+    cursor: pointer;
+    line-height: 1;
+    color: #495057;
+  }
+  .filter-handle:not(:first-child) { padding-left: 16px; }
+  .filter-handle:not(:last-child) { padding-right: 16px; border-right: 1px solid #495057; }
+  .filter-handle:hover { color: #ff922b; }
+  .filter-handle.active { color: #fd7e14; font-weight: bold; }
+
+  .dl-legend {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-size: 0.72em;
+    color: #868e96;
+  }
+  .dl-legend-item { display: inline-flex; align-items: center; gap: 5px; }
+  .dl-legend-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .dl-legend-dot.confirmed { background: #ff922b; }
+  .dl-legend-dot.predicted { background: white; border: 2px solid #0c8599; }
+  .dl-legend-dot.passed { background: #ced4da; }
+
+  /* ── Section titles ── */
+  .dl-section-title {
+    color: #004e66;
+    font-weight: bold;
+    letter-spacing: 0.12em;
+    font-size: 0.85em;
+    margin: 32px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .dl-section-title::after { content: ''; flex: 1; border-top: 1px solid #e9ecef; }
+
+  /* ── UP NEXT hero cards ── */
+  .dl-hero {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 20px 0 8px;
+  }
+  @media (max-width: 900px) { .dl-hero { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) { .dl-hero { grid-template-columns: 1fr; } }
+  .dl-hero-card {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  .dl-hero-band {
+    padding: 10px 16px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+  .dl-hero-band .band-sub { font-size: 0.75em; font-weight: normal; opacity: 0.9; white-space: nowrap; }
+  .band-confirmed { background: linear-gradient(135deg, #ffa94d, #fd7e14); }
+  .band-predicted { background: linear-gradient(135deg, #3bc9db, #0c8599); }
+  .dl-hero-body { padding: 14px 16px 16px; }
+  .dl-hero-dday {
+    font-size: 2em;
+    font-weight: bold;
+    color: #fd7e14;
+    line-height: 1.1;
+  }
+  .dl-hero-dday.predicted { color: #0c8599; }
+  .dl-hero-dday small { font-size: 0.45em; font-weight: normal; color: #868e96; margin-left: 8px; }
+  .dl-hero-date { margin-top: 6px; font-size: 0.9em; color: #495057; font-weight: bold; }
+  .dl-hero-venue { margin-top: 4px; font-size: 0.8em; color: #868e96; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+
+  /* ── Timeline ── */
+  .dl-month {
+    margin: 34px 0 4px;
+    color: #004e66;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .dl-month::after { content: ''; flex: 1; border-top: 1px solid #e9ecef; }
+
+  .dl-items { position: relative; padding: 6px 0 2px; }
+  .dl-items::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #ffe8cc;
+  }
+  .dl-item { position: relative; padding-left: 30px; margin: 14px 0; }
+  .dl-dot {
+    position: absolute;
+    left: 3px;
+    top: 24px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ff922b;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px #ff922b;
+  }
+  .dl-dot.predicted { background: white; box-shadow: 0 0 0 2px #0c8599; }
+  .dl-dot.passed { background: #ced4da; box-shadow: 0 0 0 2px #ced4da; }
+
+  .dl-card {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 14px 18px;
+    transition: box-shadow 0.15s ease;
+  }
+  .dl-card:hover { box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07); }
+
+  .dl-card-top { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .dl-card-left { min-width: 200px; flex: 1; }
+  .dl-conf-name { font-weight: bold; font-size: 1.1em; color: #343a40; margin-right: 6px; }
+  .tag {
+    display: inline-block;
+    padding: 1px 7px;
+    font-size: 0.68em;
+    font-weight: bold;
+    border-radius: 8px;
+    vertical-align: 2px;
+  }
+  .tag-NLP { color: #1565c0; background: #e3f2fd; }
+  .tag-ML { color: #7b1fa2; background: #f3e5f5; }
+  .tag-AI { color: #283593; background: #e8eaf6; }
+  .tag-CV { color: #2e7d32; background: #e8f5e9; }
+  .tag-Speech { color: #00695c; background: #e0f2f1; }
+  .tag-Robotics { color: #bf360c; background: #fbe9e7; }
+  .dl-conf-full { font-size: 0.75em; color: #adb5bd; margin-top: 3px; line-height: 1.4; }
+
+  .dl-card-right { text-align: right; }
+  @media (max-width: 640px) { .dl-card-right { text-align: left; } }
+  .dl-when { display: flex; align-items: center; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+  @media (max-width: 640px) { .dl-when { justify-content: flex-start; } }
+  .dl-date { font-weight: bold; color: #343a40; font-size: 0.95em; }
+  .dl-date.predicted { font-style: italic; }
+  .dl-date.passed { color: #adb5bd; text-decoration: line-through; font-weight: normal; }
+  .dl-chip {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 10px;
+    font-size: 0.75em;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  .dl-chip.confirmed { color: white; background: #ff922b; }
+  .dl-chip.predicted { color: #0c8599; background: white; border: 1px dashed #0c8599; font-style: italic; }
+  .dl-chip.passed { color: #adb5bd; background: #f1f3f5; font-weight: normal; }
+  .dl-where {
+    margin-top: 6px;
+    font-size: 0.8em;
+    color: #868e96;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 640px) { .dl-where { justify-content: flex-start; } }
+  .dl-where .tbd { font-style: italic; color: #adb5bd; }
+  .dl-check { color: #adb5bd; font-size: 0.9em; }
+  .dl-link { font-size: 0.95em; white-space: nowrap; }
+
+  /* ── Sub-events ── */
+  .dl-subs { margin-top: 10px; padding-top: 8px; border-top: 1px dashed #f1f3f5; }
+  .dl-sub {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 0.85em;
+    margin: 4px 0;
+  }
+  .dl-sub-label {
+    font-size: 0.78em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #868e96;
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 1px 7px;
+  }
+  .dl-sub-date { font-weight: bold; color: #495057; }
+  .dl-sub-date.passed { color: #adb5bd; text-decoration: line-through; font-weight: normal; }
+  .dl-sub .dl-chip { font-size: 0.7em; padding: 1px 7px; }
+
+  /* ── History (collapsible) ── */
+  .dl-history { margin-top: 10px; }
+  .dl-history summary {
+    cursor: pointer;
+    font-size: 0.75em;
+    color: #adb5bd;
+    user-select: none;
+    list-style: none;
+  }
+  .dl-history summary::-webkit-details-marker { display: none; }
+  .dl-history summary::before { content: '▸ '; }
+  .dl-history[open] summary::before { content: '▾ '; }
+  .dl-history summary:hover { color: #ff922b; }
+  .dl-hist-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .dl-hist-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    background: #f8f9fa;
+    border: 1px solid #f1f3f5;
+    border-radius: 10px;
+    font-size: 0.75em;
+    color: #868e96;
+    white-space: nowrap;
+  }
+  a.dl-hist-chip:hover { border-color: #ff922b; background: white; color: #868e96; }
+  .dl-hist-year { font-weight: bold; color: #adb5bd; }
+  .dl-hist-venue { color: #495057; }
+  .dl-hist-label {
+    font-size: 0.85em;
+    text-transform: uppercase;
+    color: #868e96;
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 0 4px;
+  }
+
+  /* ── Passed section ── */
+  .dl-passed-list { margin-top: 12px; }
+  .dl-passed-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 8px 4px;
+    border-bottom: 1px solid #f1f3f5;
+    color: #adb5bd;
+    font-size: 0.9em;
+  }
+  .dl-passed-row .name { font-weight: bold; color: #868e96; }
+  .dl-passed-row .date { text-decoration: line-through; }
+
+  .dl-empty {
+    margin: 24px 0;
+    color: #adb5bd;
+    font-style: italic;
+    font-size: 0.9em;
+  }
+</style>
+
+  <link rel="shortcut icon" href="/static/icon/favicon.png">
+  <title>Deadlines</title>
+
+  <meta name="google-site-verification" content="8AS7SDKzjKVNUxbCcHvNFrtYGndTCzQ-mVMdKIoN5SA" />
+</head>
+
+<body>
+  
+  <header id="header" class="">
+    <a href="/">
+      <img id="logo" src="/static/logo.svg">
+      <img id="logo-white" src="/static/logo-white.svg">
+    </a>
+    <span id="nav-toggle"><img src="/static/icon/hamburger.svg"/></span>
+    <nav id="nav">
+      
+      <div class="nav-item">
+        <a class="nav-item-anchor" href="../">HOME</a>
+      </div>
+      
+      <div class="nav-item">
+        <a class="nav-item-anchor" href="../news/">NEWS</a>
+      </div>
+      
+      <div class="nav-item">
+        <a class="nav-item-anchor" href="../publications/">PUBLICATIONS</a>
+      </div>
+      
+      <div class="nav-item">
+        <a class="nav-item-anchor active" href="../deadlines/">DEADLINES</a>
+      </div>
+      
+      <div class="nav-item">
+        <a class="nav-item-anchor" href="../people/">PEOPLE</a>
+      </div>
+      
+      <div class="nav-item">
+        <a class="nav-item-anchor" href="../contact/">CONTACT</a>
+      </div>
+      
+    </nav>
+  </header>
+  
+
+  <div id="body">
+<div class="dl-wrap">
+  <div class="dl-head">
+    <h1>Deadlines</h1>
+    <p class="dl-sub">Last Update: 2026-07-29 &middot; <span id="conf-count"></span> conferences tracked &middot; All times in KST (UTC+9)</p>
+  </div>
+
+  <div class="dl-filterbar">
+    <div class="dl-filters" id="dl-filters">
+      <span class="filter-handle active" data-tag="all">All</span>
+    </div>
+    <div class="dl-legend">
+      <span class="dl-legend-item"><span class="dl-legend-dot confirmed"></span> Official</span>
+      <span class="dl-legend-item"><span class="dl-legend-dot predicted"></span> Predicted</span>
+      <span class="dl-legend-item"><span class="dl-legend-dot passed"></span> Passed</span>
+    </div>
+  </div>
+
+  <div class="dl-section-title" id="dl-hero-title">UP NEXT</div>
+  <div class="dl-hero" id="dl-hero"></div>
+
+  <div id="dl-timeline"></div>
+
+  <div id="dl-passed-wrap" style="display:none;">
+    <div class="dl-section-title">RECENTLY PASSED</div>
+    <div class="dl-passed-list" id="dl-passed"></div>
+  </div>
+</div>
+</div>
+
+  <footer>
+    <div class="row">
+      <div class="column">
+        <img src="/static/logo-white.svg">
+        <div style="font-weight: bold;">Machine Learning and Intelligence Lab</div>
+        © Copyright <script>document.write(/\d{4}/.exec(Date())[0])</script>, MLILAB, Kim Jaechul Graduate School of AI and School of Computing, KAIST
+      </div>
+      <div class="column">
+        <div style="font-weight: bold;">Lab Address</div>
+        Yangjae | SEOUL AI HUB, 5F, 108, Taebong-ro, Seocho-gu, Seoul, Republic of Korea (ZIP: 06764)<br>
+      </div>
+      <div class="column">
+        <div style="font-weight: bold;">Contact</div>
+        Professor | <a href="mailto:eunhoy@kaist.ac.kr">Eunho Yang</a><br>
+        Lab Head | <a href="mailto:jadohu@kaist.ac.kr">Doohyuk Jang</a><br>
+      </div>
+      <div class="column">
+        <div style="font-weight: bold;">Links</div>
+        <a style="display:flex; align-items:center;" href="https://twitter.com/MLILAB_KAIST" target="_blank">
+          <img style="height:1.5em;" src="/static/icon/x.png">
+          <span style="margin-left:0.5em;">X (Twitter)</span>
+        </a>
+        <a style="display:flex; align-items:center;" href="https://github.com/mlilab" target="_blank">
+          <img style="height:1.5em;" src="/static/icon/github.png">
+          <span style="margin-left:0.5em;">GitHub</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var body = document.getElementsByTagName('body')[0]
+    var navToggle = document.getElementById('nav-toggle')
+    var nav = document.getElementById('nav')
+
+    navToggle.addEventListener('click', function(e) {
+      if (nav.style.display === 'flex') {
+        body.style.overflow = ''
+        nav.style.display = 'none'
+      } else {
+        body.style.overflow = 'hidden'
+        nav.style.display = 'flex'
+      }
+    })
+  </script>
+  
+<script type="application/json" id="deadlines-data">
+{
+  "conferences": [
+    {
+      "name": "AAAI",
+      "full_name": "AAAI Conference on Artificial Intelligence",
+      "tags": ["AI"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2026-07-29 20:59",
+        "venue": "Montr\u00e9al, Canada",
+        "venue_confirmed": true,
+        "url": "https://aaai.org/conference/aaai/aaai-27/",
+        "predicted": false
+      },
+      "sub_events_raw": "Abstract | 2026-07-22 20:59 | confirmed | https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/",
+      "history_raw": "2026 | 2025-08-02 20:59 | Singapore | https://aaai.org/conference/aaai/aaai-26/\n2025 | 2024-08-16 20:59 | Philadelphia, USA | https://aaai.org/conference/aaai/aaai-25/"
+    },
+    {
+      "name": "ACL",
+      "full_name": "Annual Meeting of the Association for Computational Linguistics",
+      "tags": ["NLP"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2027-01-06 20:59",
+        "venue": "Kyoto, Japan",
+        "venue_confirmed": true,
+        "url": "https://2027.aclweb.org/",
+        "predicted": true
+      },
+      "sub_events_raw": "",
+      "history_raw": "2026 | 2026-01-06 20:59 | San Diego, USA | https://2026.aclweb.org/\n2025 | 2025-02-16 20:59 | Vienna, Austria | https://2025.aclweb.org/"
+    },
+    {
+      "name": "AISTATS",
+      "full_name": "International Conference on Artificial Intelligence and Statistics",
+      "tags": ["ML"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2026-10-03 20:59",
+        "venue": "Montr\u00e9al, Canada",
+        "venue_confirmed": true,
+        "url": "https://virtual.aistats.org/",
+        "predicted": true
+      },
+      "sub_events_raw": "",
+      "history_raw": "2026 | 2025-10-03 20:59 | Tangier, Morocco | https://virtual.aistats.org/Conferences/2026\n2025 | 2024-10-11 20:59 | Mai Khao, Thailand | https://aistats.org/aistats2025/"
+    },
+    {
+      "name": "COLING",
+      "full_name": "International Conference on Computational Linguistics",
+      "tags": ["NLP"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2026-10-13 20:59",
+        "venue": "Macau, China",
+        "venue_confirmed": true,
+        "url": "https://2027.coling-iccl.org/",
+        "predicted": false
+      },
+      "sub_events_raw": "ARR Commitment | 2026-12-21 20:59 | confirmed | https://aclrollingreview.org/dates",
+      "history_raw": "2025 | 2024-09-17 20:59 | Abu Dhabi, UAE | https://coling2025.org/"
+    },
+    {
+      "name": "COLM",
+      "full_name": "Conference on Language Modeling",
+      "tags": ["NLP"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2027-04-01 20:59",
+        "venue": "TBD",
+        "venue_confirmed": false,
+        "url": "https://colmweb.org/",
+        "predicted": true
+      },
+      "sub_events_raw": "",
+      "history_raw": "2026 | 2026-04-01 20:59 | San Francisco, USA | https://colmweb.org/\n2025 | 2025-03-29 20:59 | Montreal, Canada | https://colmweb.org/2025/"
+    },
+    {
+      "name": "CoRL",
+      "full_name": "Conference on Robot Learning",
+      "tags": ["Robotics"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2027-05-29 20:59",
+        "venue": "TBD",
+        "venue_confirmed": false,
+        "url": "https://www.corl.org/",
+        "predicted": true
+      },
+      "sub_events_raw": "",
+      "history_raw": "2026 | 2026-05-29 20:59 | Austin, USA | https://www.corl.org/\n2025 | 2025-05-01 20:59 | Seoul, South Korea | https://www.corl.org/\n2024 | 2024-06-07 20:59 | Munich, Germany | https://2024.corl.org/"
+    },
+    {
+      "name": "CVPR",
+      "full_name": "Conference on Computer Vision and Pattern Recognition",
+      "tags": ["CV"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2026-11-14 20:59",
+        "venue": "Seattle, USA",
+        "venue_confirmed": true,
+        "url": "https://cvpr.thecvf.com/",
+        "predicted": true
+      },
+      "sub_events_raw": "",
+      "history_raw": "2026 | 2025-11-14 20:59 | Denver, USA | https://cvpr.thecvf.com/Conferences/2026\n2025 | 2024-11-15 20:59 | Nashville, USA | https://cvpr.thecvf.com/Conferences/2025"
+    },
+    {
+      "name": "EACL",
+      "full_name": "European Chapter of the ACL",
+      "tags": ["NLP"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2026-08-04 20:59",
+        "venue": "Athens, Greece",
+        "venue_confirmed": true,
+        "url": "https://2027.eacl.org/calls/papers/",
+        "predicted": false
+      },
+      "sub_events_raw": "ARR Commitment | 2026-10-12 20:59 | confirmed | https://2027.eacl.org/calls/papers/",
+      "history_raw": "2026 | 2025-10-07 20:59 | Rabat, Morocco | https://2026.eacl.org/\n2024 | 2023-10-16 20:59 | Malta | https://2024.eacl.org/"
+    },
+    {
+      "name": "ECCV",
+      "full_name": "European Conference on Computer Vision",
+      "tags": ["CV"],
+      "upcoming": {
+        "year": "2028",
+        "date": "2028-03-06 20:59",
+        "venue": "Bucharest, Romania",
+        "venue_confirmed": false,
+        "url": "https://eccv.ecva.net/",
+        "predicted": true
+      },
+      "sub_events_raw": "",
+      "history_raw": "2026 | 2026-03-06 20:59 | Malm\u00f6, Sweden | https://eccv.ecva.net/Conferences/2026\n2024 | 2024-03-08 20:59 | Milan, Italy | https://eccv.ecva.net/Conferences/2024"
+    },
+    {
+      "name": "EMNLP",
+      "full_name": "Conference on Empirical Methods in Natural Language Processing",
+      "tags": ["NLP"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2027-05-26 20:59",
+        "venue": "Mexico or Central America (tentative)",
+        "venue_confirmed": false,
+        "url": "https://aclanthology.org/venues/emnlp/",
+        "predicted": true
+      },
+      "sub_events_raw": "",
+      "history_raw": "2026 | 2026-05-26 20:59 | Budapest, Hungary | https://2026.emnlp.org/\n2025 | 2025-05-20 20:59 | Suzhou, China | https://2025.emnlp.org/\n2024 | 2024-06-16 20:59 | Miami, USA | https://2024.emnlp.org/"
+    },
+    {
+      "name": "ICASSP",
+      "full_name": "International Conference on Acoustics, Speech, and Signal Processing",
+      "tags": ["Speech"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2026-09-17 20:59",
+        "venue": "Toronto, Canada",
+        "venue_confirmed": true,
+        "url": "https://2027.ieeeicassp.org/important-dates/",
+        "predicted": false
+      },
+      "sub_events_raw": "",
+      "history_raw": "2026 | 2025-09-18 20:59 | Barcelona, Spain | https://2026.ieeeicassp.org/\n2025 | 2024-09-10 20:59 | Hyderabad, India | https://2025.ieeeicassp.org/"
+    },
+    {
+      "name": "ICCV",
+      "full_name": "International Conference on Computer Vision",
+      "tags": ["CV"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2027-03-08 20:59",
+        "venue": "Hong Kong",
+        "venue_confirmed": true,
+        "url": "https://iccv.thecvf.com/",
+        "predicted": true
+      },
+      "sub_events_raw": "",
+      "history_raw": "2025 | 2025-03-08 20:59 | Honolulu, USA | https://iccv.thecvf.com/Conferences/2025\n2023 | 2023-03-09 20:59 | Paris, France | https://iccv2023.thecvf.com/"
+    },
+    {
+      "name": "ICLR",
+      "full_name": "International Conference on Learning Representations",
+      "tags": ["ML"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2026-09-17 20:59",
+        "venue": "California, USA",
+        "venue_confirmed": true,
+        "url": "https://iclr.cc/Conferences/2027/CallForPapers",
+        "predicted": false
+      },
+      "sub_events_raw": "Abstract | 2026-09-12 20:59 | confirmed | https://iclr.cc/Conferences/2027/CallForPapers",
+      "history_raw": "2026 | 2025-09-25 20:59 | Rio de Janeiro, Brazil | https://iclr.cc/Conferences/2026\n2025 | 2024-10-02 20:59 | Singapore | https://iclr.cc/Conferences/2025"
+    },
+    {
+      "name": "ICML",
+      "full_name": "International Conference on Machine Learning",
+      "tags": ["ML"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2027-01-29 20:59",
+        "venue": "South America",
+        "venue_confirmed": true,
+        "url": "https://icml.cc/Conferences/FutureMeetings",
+        "predicted": true
+      },
+      "sub_events_raw": "",
+      "history_raw": "2026 | 2026-01-29 20:59 | Seoul, South Korea | https://icml.cc/Conferences/2026\n2025 | 2025-01-31 20:59 | Vancouver, Canada | https://icml.cc/Conferences/2025"
+    },
+    {
+      "name": "ICRA",
+      "full_name": "International Conference on Robotics and Automation",
+      "tags": ["Robotics"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2026-09-16 16:59",
+        "venue": "Seoul, South Korea",
+        "venue_confirmed": true,
+        "url": "https://2027.ieee-icra.org/contribute/",
+        "predicted": false
+      },
+      "sub_events_raw": "",
+      "history_raw": "2026 | 2025-09-16 16:59 | Vienna, Austria | https://2026.ieee-icra.org/\n2025 | 2024-09-17 16:59 | Atlanta, USA | https://2025.ieee-icra.org/"
+    },
+    {
+      "name": "IJCAI",
+      "full_name": "International Joint Conference on Artificial Intelligence",
+      "tags": ["AI"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2027-01-20 20:59",
+        "venue": "TBD",
+        "venue_confirmed": false,
+        "url": "https://www.ijcai.org/future_conferences",
+        "predicted": true
+      },
+      "sub_events_raw": "",
+      "history_raw": "2026 | 2026-01-20 20:59 | Bremen, Germany | https://2026.ijcai.org/\n2025 | 2025-01-24 20:59 | Montreal, Canada | https://2025.ijcai.org/"
+    },
+    {
+      "name": "InterSpeech",
+      "full_name": "Annual Conference of the International Speech Communication Association",
+      "tags": ["Speech"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2027-02-26 20:59",
+        "venue": "S\u00e3o Paulo, Brazil",
+        "venue_confirmed": true,
+        "url": "https://interspeech2027.org/",
+        "predicted": true
+      },
+      "sub_events_raw": "",
+      "history_raw": "2026 | 2026-02-26 20:59 | Sydney, Australia | https://interspeech2026.org/\n2025 | 2025-02-13 20:59 | Rotterdam, Netherlands | https://interspeech2025.org/"
+    },
+    {
+      "name": "IROS",
+      "full_name": "IEEE/RSJ International Conference on Intelligent Robots and Systems",
+      "tags": ["Robotics"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2027-03-03 16:59",
+        "venue": "TBD",
+        "venue_confirmed": false,
+        "url": "https://www.ieee-ras.org/conferences-workshops/financially-co-sponsored/iros",
+        "predicted": true
+      },
+      "sub_events_raw": "",
+      "history_raw": "2026 | 2026-03-03 16:59 | Pittsburgh, USA | https://2026.ieee-iros.org/\n2025 | 2025-03-03 16:59 | Hangzhou, China | https://www.iros25.org/"
+    },
+    {
+      "name": "NAACL",
+      "full_name": "North American Chapter of the ACL",
+      "tags": ["NLP"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2026-10-13 20:59",
+        "venue": "San Francisco, USA",
+        "venue_confirmed": true,
+        "url": "https://2027.naacl.org/",
+        "predicted": false
+      },
+      "sub_events_raw": "ARR Commitment | 2026-12-21 20:59 | confirmed | https://aclrollingreview.org/dates",
+      "history_raw": "2025 | 2024-10-16 20:59 | Albuquerque, USA | https://2025.naacl.org/\n2024 | 2023-12-16 20:59 | Mexico City, Mexico | https://2024.naacl.org/"
+    },
+    {
+      "name": "NeurIPS",
+      "full_name": "Conference on Neural Information Processing Systems",
+      "tags": ["ML"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2027-05-06 20:59",
+        "venue": "Europe",
+        "venue_confirmed": true,
+        "url": "https://neurips.cc/Conferences/FutureMeetings",
+        "predicted": true
+      },
+      "sub_events_raw": "",
+      "history_raw": "2026 | 2026-05-07 20:59 | Sydney, Australia | https://neurips.cc/Conferences/2026\n2025 | 2025-05-16 20:59 | San Diego, USA | https://neurips.cc/Conferences/2025"
+    },
+    {
+      "name": "RSS",
+      "full_name": "Robotics: Science and Systems",
+      "tags": ["Robotics"],
+      "upcoming": {
+        "year": "2027",
+        "date": "2027-01-31 20:59",
+        "venue": "TBD",
+        "venue_confirmed": false,
+        "url": "https://roboticsconference.org/",
+        "predicted": true
+      },
+      "sub_events_raw": "",
+      "history_raw": "2026 | 2026-01-31 20:59 | Sydney, Australia | https://roboticsconference.org/\n2025 | 2025-01-25 20:59 | Los Angeles, USA | https://roboticsconference.org/2025/"
+    }
+  ]
+}
+</script>
+
+
+<script>
+  // Sub events / history are authored in content/deadlines/<conf>/contents.lr
+  // as pipe-separated lines; parse them into objects here.
+  function parseLines(raw) {
+    return (raw || '').split('\n').map(s => s.trim()).filter(Boolean);
+  }
+  function parseSubEvents(raw) {
+    return parseLines(raw).map(line => {
+      const p = line.split('|').map(s => s.trim());
+      return { label: p[0], date: p[1], predicted: p[2] === 'predicted', url: p[3] || null };
+    });
+  }
+  function parseHistory(raw) {
+    return parseLines(raw).map(line => {
+      const p = line.split('|').map(s => s.trim());
+      return { year: p[0], date: p[1], venue: p[2], url: p[3] || null, label: p[4] || null };
+    });
+  }
+
+  const CONFERENCES = JSON.parse(document.getElementById('deadlines-data').textContent).conferences
+    .map(c => ({
+      name: c.name,
+      full_name: c.full_name,
+      tags: c.tags,
+      upcoming: Object.assign({}, c.upcoming, { sub_events: parseSubEvents(c.sub_events_raw) }),
+      history: parseHistory(c.history_raw)
+    }));
+  let today = new Date();
+
+  const FLAGS = {
+    'Italy': '🇮🇹', 'USA': '🇺🇸', 'United States': '🇺🇸',
+    'Hungary': '🇭🇺', 'South Korea': '🇰🇷', 'Korea': '🇰🇷',
+    'Hong Kong': '🇭🇰', 'Canada': '🇨🇦', 'Greece': '🇬🇷',
+    'Austria': '🇦🇹', 'Brazil': '🇧🇷', 'Czechia': '🇨🇿', 'Czech Republic': '🇨🇿',
+    'Australia': '🇦🇺', 'China': '🇨🇳', 'Germany': '🇩🇪',
+    'UAE': '🇦🇪', 'United Arab Emirates': '🇦🇪',
+    'Malta': '🇲🇹', 'Japan': '🇯🇵', 'France': '🇫🇷',
+    'UK': '🇬🇧', 'United Kingdom': '🇬🇧', 'Singapore': '🇸🇬',
+    'Spain': '🇪🇸', 'Ireland': '🇮🇪', 'Mexico': '🇲🇽',
+    'Sweden': '🇸🇪', 'Finland': '🇫🇮', 'Netherlands': '🇳🇱',
+    'Romania': '🇷🇴', 'Macau': '🇲🇴', 'São Paulo': '🇧🇷',
+    'Morocco': '🇲🇦', 'Thailand': '🇹🇭', 'India': '🇮🇳'
+  };
+
+  const VAGUE_VENUES = ['TBD', 'South America', 'Europe', 'West Coast North America', 'Asia/Oceania'];
+
+  function flagFor(venue) {
+    if (!venue || VAGUE_VENUES.includes(venue) || venue.includes('(TBD)')) return '';
+    for (const country of Object.keys(FLAGS)) {
+      if (venue.endsWith(country) || venue.includes(', ' + country)) return FLAGS[country];
+    }
+    return '';
+  }
+
+  function dateOf(s) { return new Date(s.replace(' ', 'T') + ':00+09:00'); }
+  function isPast(d) { return d.getTime() < today.getTime(); }
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const MONTHS_S = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  // The page states all times in KST, so format in Asia/Seoul regardless of
+  // where the visitor is — never use the Date getters, which are local-time.
+  const KST_FMT = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Seoul', year: 'numeric', month: 'numeric', day: 'numeric',
+    hour: '2-digit', minute: '2-digit', hour12: false
+  });
+  function kst(d) {
+    const p = {};
+    for (const part of KST_FMT.formatToParts(d)) p[part.type] = part.value;
+    return { y: +p.year, m: +p.month - 1, d: +p.day, hh: p.hour, mm: p.minute };
+  }
+  function fmtDate(d) { const k = kst(d); return `${MONTHS_S[k.m]} ${k.d}, ${k.y}`; }
+  function fmtShort(d) { const k = kst(d); return `${MONTHS_S[k.m]} ${k.d}`; }
+  function fmtTime(d) { const k = kst(d); return `${k.hh}:${k.mm} KST`; }
+  function monthKeyOf(d) { const k = kst(d); return `${MONTHS[k.m]} ${k.y}`; }
+  function shortYear(y) { return "'" + String(y).slice(-2); }
+
+  // Whole days between two instants, counted on the KST calendar.
+  function kstDayIndex(d) { const k = kst(d); return Date.UTC(k.y, k.m, k.d) / 86400000; }
+
+  function ddayLabel(d) {
+    if (isPast(d)) return 'PASSED';
+    const days = kstDayIndex(d) - kstDayIndex(today);
+    return days <= 0 ? 'D-DAY' : 'D-' + days;
+  }
+
+  function hoursLeft(d) {
+    const ms = d.getTime() - today.getTime();
+    if (ms < 0) return '';
+    const days = Math.floor(ms / 86400000);
+    const hours = Math.floor((ms % 86400000) / 3600000);
+    if (days > 30) return `${days} days left`;
+    if (days > 0) return `${days}d ${hours}h left`;
+    const mins = Math.floor((ms % 3600000) / 60000);
+    return `${hours}h ${mins}m left`;
+  }
+
+  function statusOf(d, predicted) {
+    if (isPast(d)) return 'passed';
+    return predicted ? 'predicted' : 'confirmed';
+  }
+
+  // Earliest not-yet-passed deadline among the main date and sub-events.
+  function effectiveNext(conf) {
+    const cands = [];
+    const up = conf.upcoming;
+    cands.push({ date: dateOf(up.date), label: null, predicted: up.predicted, url: up.url });
+    for (const sub of (up.sub_events || [])) {
+      cands.push({ date: dateOf(sub.date), label: sub.label, predicted: sub.predicted, url: sub.url || up.url });
+    }
+    const future = cands.filter(c => !isPast(c.date));
+    if (!future.length) return null;
+    return future.sort((a, b) => a.date - b.date)[0];
+  }
+
+  function renderTags(tags) {
+    return tags.map(t => `<span class="tag tag-${t}">${t}</span>`).join(' ');
+  }
+
+  function venueHtml(up) {
+    if (up.venue === 'TBD') return '<span class="tbd">venue TBD</span>';
+    const flag = flagFor(up.venue);
+    const flagHtml = flag ? `<span>${flag}</span>` : '';
+    const mark = (up.predicted && up.venue_confirmed && !VAGUE_VENUES.includes(up.venue))
+      ? ' <span class="dl-check" title="Venue officially confirmed">✓</span>' : '';
+    const cls = up.venue_confirmed ? '' : 'tbd';
+    return `${flagHtml}<span class="${cls}">${up.venue}</span>${mark}`;
+  }
+
+  function chipHtml(d, predicted) {
+    const status = statusOf(d, predicted);
+    const label = status === 'passed' ? 'PASSED' : ddayLabel(d);
+    return `<span class="dl-chip ${status}">${label}</span>`;
+  }
+
+  function renderHeroCard(conf, eff) {
+    const status = statusOf(eff.date, eff.predicted);
+    const bandSub = eff.label ? eff.label : 'Full paper';
+    const linkHtml = eff.url ? `&middot; <a class="dl-link" href="${eff.url}" target="_blank">Site ↗</a>` : '';
+    return `
+      <div class="dl-hero-card">
+        <div class="dl-hero-band band-${status}">
+          <span>${conf.name} ${conf.upcoming.year}</span>
+          <span class="band-sub">${bandSub}</span>
+        </div>
+        <div class="dl-hero-body">
+          <div class="dl-hero-dday ${status}">${ddayLabel(eff.date)}<small>${hoursLeft(eff.date)}</small></div>
+          <div class="dl-hero-date">${fmtDate(eff.date)} &middot; ${fmtTime(eff.date)}</div>
+          <div class="dl-hero-venue">${venueHtml(conf.upcoming)} ${linkHtml}</div>
+        </div>
+      </div>`;
+  }
+
+  const openHistories = new Set();
+
+  function renderHistory(confName, hist) {
+    if (!hist || !hist.length) return '';
+    const chips = hist.slice(0, 3).map(h => {
+      const d = dateOf(h.date);
+      const flag = flagFor(h.venue);
+      const labelHtml = h.label ? `<span class="dl-hist-label">${h.label}</span>` : '';
+      const tag = h.url ? 'a' : 'span';
+      const hrefAttr = h.url ? ` href="${h.url}" target="_blank"` : '';
+      const arrow = h.url ? ' ↗' : '';
+      return `<${tag} class="dl-hist-chip"${hrefAttr}>
+        <span class="dl-hist-year">${shortYear(h.year)}</span>${labelHtml}
+        <span class="dl-hist-venue">${flag ? flag + ' ' : ''}${h.venue}</span>
+        <span>${fmtShort(d)}${arrow}</span>
+      </${tag}>`;
+    }).join('');
+    const openAttr = openHistories.has(confName) ? ' open' : '';
+    return `<details class="dl-history" data-conf="${confName}"${openAttr}><summary>Recent history</summary><div class="dl-hist-chips">${chips}</div></details>`;
+  }
+
+  function renderSubs(up) {
+    if (!up.sub_events || !up.sub_events.length) return '';
+    const rows = up.sub_events.map(sub => {
+      const sd = dateOf(sub.date);
+      const status = statusOf(sd, sub.predicted);
+      const link = sub.url ? `<a class="dl-link" href="${sub.url}" target="_blank">CFP ↗</a>` : '';
+      return `
+        <div class="dl-sub">
+          <span class="dl-sub-label">${sub.label}</span>
+          <span class="dl-sub-date ${status === 'passed' ? 'passed' : ''}">${fmtDate(sd)}</span>
+          ${chipHtml(sd, sub.predicted)}
+          ${link}
+        </div>`;
+    }).join('');
+    return `<div class="dl-subs">${rows}</div>`;
+  }
+
+  function renderConfCard(conf, eff) {
+    const up = conf.upcoming;
+    const mainDate = dateOf(up.date);
+    const mainStatus = statusOf(mainDate, up.predicted);
+    const dotStatus = statusOf(eff.date, eff.predicted);
+    const linkHtml = up.url ? `<a class="dl-link" href="${up.url}" target="_blank">Site ↗</a>` : '';
+    return `
+      <div class="dl-item">
+        <span class="dl-dot ${dotStatus}"></span>
+        <div class="dl-card">
+          <div class="dl-card-top">
+            <div class="dl-card-left">
+              <span class="dl-conf-name">${conf.name} ${up.year}</span>${renderTags(conf.tags)}
+              <div class="dl-conf-full">${conf.full_name || ''}</div>
+            </div>
+            <div class="dl-card-right">
+              <div class="dl-when">
+                <span class="dl-date ${mainStatus === 'passed' ? 'passed' : ''} ${up.predicted ? 'predicted' : ''}">${fmtDate(mainDate)}</span>
+                ${chipHtml(mainDate, up.predicted)}
+              </div>
+              <div class="dl-where">${venueHtml(up)} ${linkHtml}</div>
+            </div>
+          </div>
+          ${renderSubs(up)}
+          ${renderHistory(conf.name, conf.history)}
+        </div>
+      </div>`;
+  }
+
+  let activeTag = 'all';
+
+  function filteredConfs() {
+    if (activeTag === 'all') return CONFERENCES;
+    return CONFERENCES.filter(c => c.tags.includes(activeTag));
+  }
+
+  function render() {
+    today = new Date();
+    const confs = filteredConfs();
+
+    const active = [];
+    const passed = [];
+    for (const conf of confs) {
+      const eff = effectiveNext(conf);
+      if (eff) active.push({ conf, eff }); else passed.push(conf);
+    }
+    active.sort((a, b) => a.eff.date - b.eff.date);
+
+    // UP NEXT hero: three nearest deadlines
+    const heroEl = document.getElementById('dl-hero');
+    const heroTitle = document.getElementById('dl-hero-title');
+    const heroes = active.slice(0, 3);
+    heroEl.innerHTML = heroes.map(x => renderHeroCard(x.conf, x.eff)).join('');
+    heroTitle.style.display = heroes.length ? 'flex' : 'none';
+
+    // Timeline grouped by month of the effective next deadline
+    const timelineEl = document.getElementById('dl-timeline');
+    if (!active.length) {
+      timelineEl.innerHTML = '<div class="dl-empty">No upcoming deadlines for this filter.</div>';
+    } else {
+      let html = '';
+      let currentMonth = '';
+      let items = '';
+      for (const { conf, eff } of active) {
+        const monthKey = monthKeyOf(eff.date);
+        if (monthKey !== currentMonth) {
+          if (items) html += `<div class="dl-items">${items}</div>`;
+          html += `<div class="dl-month">${monthKey}</div>`;
+          currentMonth = monthKey;
+          items = '';
+        }
+        items += renderConfCard(conf, eff);
+      }
+      if (items) html += `<div class="dl-items">${items}</div>`;
+      timelineEl.innerHTML = html;
+    }
+
+    // Fully passed conferences (no future deadline in the data)
+    const passedWrap = document.getElementById('dl-passed-wrap');
+    const passedEl = document.getElementById('dl-passed');
+    if (passed.length) {
+      passedWrap.style.display = 'block';
+      passedEl.innerHTML = passed
+        .sort((a, b) => dateOf(b.upcoming.date) - dateOf(a.upcoming.date))
+        .map(conf => {
+          const d = dateOf(conf.upcoming.date);
+          const link = conf.upcoming.url ? `<a class="dl-link" href="${conf.upcoming.url}" target="_blank">Site ↗</a>` : '';
+          return `<div class="dl-passed-row">
+            <span class="name">${conf.name} ${conf.upcoming.year}</span>
+            <span class="date">${fmtDate(d)}</span>
+            <span>next cycle not announced yet</span>
+            ${link}
+          </div>`;
+        }).join('');
+    } else {
+      passedWrap.style.display = 'none';
+    }
+  }
+
+  function buildFilters() {
+    const tagSet = new Set();
+    CONFERENCES.forEach(c => c.tags.forEach(t => tagSet.add(t)));
+    const order = ['NLP', 'ML', 'AI', 'CV', 'Speech', 'Robotics'];
+    const container = document.getElementById('dl-filters');
+    order.filter(t => tagSet.has(t)).forEach(tag => {
+      const span = document.createElement('span');
+      span.className = 'filter-handle';
+      span.dataset.tag = tag;
+      span.textContent = tag;
+      container.appendChild(span);
+    });
+    container.addEventListener('click', e => {
+      const tag = e.target.dataset && e.target.dataset.tag;
+      if (!tag) return;
+      activeTag = tag;
+      document.querySelectorAll('.filter-handle').forEach(h => {
+        h.classList.toggle('active', h.dataset.tag === activeTag);
+      });
+      render();
+    });
+  }
+
+  // Keep "Recent history" expanders open across periodic re-renders.
+  document.addEventListener('toggle', e => {
+    const det = e.target;
+    if (!det.classList || !det.classList.contains('dl-history')) return;
+    if (det.open) openHistories.add(det.dataset.conf); else openHistories.delete(det.dataset.conf);
+  }, true);
+
+  document.getElementById('conf-count').textContent = CONFERENCES.length;
+  buildFilters();
+  render();
+  setInterval(render, 60000);
+</script>
+
+
+</body>
+
+</html>
